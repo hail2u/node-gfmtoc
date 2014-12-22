@@ -1,0 +1,16 @@
+{
+  "name": "gfmtoc",
+  "description": "The GithHub flavoured Markdown ToC generator",
+  "version": "0.0.1",
+  "author": "Kyo Nagashima <hail2u@gmail.com> (https://kyonagashima.com/)",
+  "bin": {
+    "gfmtoc": "bin/gfmtoc"
+  },
+  "dependencies": {
+    "marked": "^0.3.2"
+  },
+  "license": {
+    "type": "MIT",
+    "url": "http://hail2u.mit-license.org/2014"
+  }
+}
