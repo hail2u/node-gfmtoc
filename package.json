@@ -6,11 +6,21 @@
   "bin": {
     "gfmtoc": "bin/gfmtoc"
   },
+  "bugs": {
+    "url": "https://github.com/hail2u/node-gfmtoc/issues"
+  },
   "dependencies": {
     "marked": "^0.3.2"
   },
+  "homepage": "https://github.com/hail2u/node-gfmtoc",
   "license": {
     "type": "MIT",
     "url": "http://hail2u.mit-license.org/2014"
+  },
+  "main": "index.js",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hail2u/node-gfmtoc.git"
   }
 }
