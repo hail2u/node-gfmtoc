@@ -3,21 +3,19 @@
 'use strict';
 
 var fs = require('fs');
-var marked = require('marked');
 var os = require('os');
 
-var word = require('../lib/regexp-word');
+var gfmtoc = require('../index');
 
 var file = 'README.md';
-var indent = '  ';
 
 if (process.argv.length > 2) {
   file = process.argv[2];
 }
 
 var markdown = fs.readFileSync(file, 'utf8');
-var eol = getEol(markdown);
-var toc = buildToc(markdown);
+var eol = gfmtoc.getEol(markdown);
+var toc = gfmtoc.buildToc(markdown);
 fs.writeFileSync(file, markdown.split(eol).map(function (l) {
   if (l === '<!-- #toc -->') {
     this.skip = true;
@@ -40,64 +38,3 @@ fs.writeFileSync(file, markdown.split(eol).map(function (l) {
 }).filter(function (l) {
   return l !== undefined;
 }).join(eol));
-
-function getEol(s) {
-  var cr = '\r';
-  var lf = '\n';
-  var crlf = '\r\n';
-
-  if (!s) {
-    return os.EOL;
-  }
-
-  var r = s.split(cr).length;
-  var n = s.split(lf).length;
-  var rn = s.split(crlf).length;
-
-  if (r === rn && n === rn) {
-    return crlf;
-  }
-
-  if (r > n) {
-    return cr;
-  }
-
-  return lf;
-}
-
-function buildToc(markdown) {
-  var h = [];
-  var renderer = new marked.Renderer();
-  renderer.heading = function (text, level, raw) {
-    h.push({
-      l: level,
-      r: raw,
-      t: text
-    });
-
-    return;
-  };
-  marked(markdown, {
-    renderer: renderer
-  });
-  h.shift();
-
-  return h.map(function (v, i, a) {
-    var sp = new Array(Math.max(0, v.l - a[0].l + 1)).join(indent);
-    var id = v.r.toLowerCase();
-    var uniq = '';
-    id = id.replace(word, '');
-    id = id.replace(/ /g, '-');
-
-    if (!this.headers[id]) {
-      this.headers[id] = 1;
-    } else {
-      uniq = '-' + this.headers[id];
-      this.headers[id] += 1;
-    }
-
-    return sp + '* [' + v.r + '](#' + encodeURIComponent(id + uniq) + ')';
-  }, {
-    headers: {}
-  }).join(eol).trim();
-}
