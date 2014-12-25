@@ -7,13 +7,13 @@ The GitHub flavored Markdown ToC generator.
 NOTE
 ----
 
-I don’t want to publish this npm packge to npm registry.
+I don’t want to publish this npm package to npm registry.
 
 
 INSTALL
 -------
 
-    $ git clone https://github.com/hail2u/gfmtoc.git
+    $ git clone https://github.com/hail2u/node-gfmtoc.git
     $ npm install
     $ npm link
 
@@ -43,7 +43,7 @@ Write `foo.md`:
 
 Then run:
 
-    $ mdtoc foo.md
+    $ gfmtoc foo.md
 
 Get:
 
