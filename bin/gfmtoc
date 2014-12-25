@@ -17,25 +17,12 @@ if (process.argv.length > 2) {
 
 var markdown = fs.readFileSync(file, 'utf8');
 var eol = getEol(markdown);
-var headings = [];
-var renderer = new marked.Renderer();
-renderer.heading = function (t, l, r) {
-  headings.push({
-    l: l,
-    r: r,
-    t: t
-  });
-
-  return;
-};
-marked(markdown, {
-  renderer: renderer
-});
+var toc = buildToc(markdown);
 fs.writeFileSync(file, markdown.split(eol).map(function (l) {
   if (l === '<!-- #toc -->') {
     this.skip = true;
 
-    return l + eol + eol + buildToc(headings).trim();
+    return l + eol + eol + toc;
   }
 
   if (l === '<!-- /toc -->') {
@@ -78,11 +65,25 @@ function getEol(s) {
   return lf;
 }
 
-function buildToc(a) {
-  a.shift();
+function buildToc(markdown) {
+  var h = [];
+  var renderer = new marked.Renderer();
+  renderer.heading = function (text, level, raw) {
+    h.push({
+      l: level,
+      r: raw,
+      t: text
+    });
 
-  return a.map(function (v) {
-    var i = new Array(Math.max(0, v.l - a[0].l + 1)).join(indent);
+    return;
+  };
+  marked(markdown, {
+    renderer: renderer
+  });
+  h.shift();
+
+  return h.map(function (v, i, a) {
+    var sp = new Array(Math.max(0, v.l - a[0].l + 1)).join(indent);
     var id = v.r.toLowerCase();
     var uniq = '';
     id = id.replace(word, '');
@@ -95,8 +96,8 @@ function buildToc(a) {
       this.headers[id] += 1;
     }
 
-    return i + '* [' + v.r + '](#' + encodeURIComponent(id + uniq) + ')';
+    return sp + '* [' + v.r + '](#' + encodeURIComponent(id + uniq) + ')';
   }, {
     headers: {}
-  }).join(eol);
+  }).join(eol).trim();
 }
