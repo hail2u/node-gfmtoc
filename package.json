@@ -1,7 +1,7 @@
 {
   "name": "gfmtoc",
   "description": "The GithHub flavoured Markdown ToC generator",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": "Kyo Nagashima <hail2u@gmail.com> (https://kyonagashima.com/)",
   "bin": {
     "gfmtoc": "bin/gfmtoc"
