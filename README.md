@@ -22,9 +22,7 @@ I don’t want to publish this npm package to npm registry.
 INSTALL
 -------
 
-    $ git clone https://github.com/hail2u/node-gfmtoc.git
-    $ npm install
-    $ npm link
+    $ npm install -g hail2u/node-gfmtoc
 
 
 USAGE
