@@ -3,8 +3,6 @@
 'use strict';
 
 var fs = require('fs');
-var os = require('os');
-
 var gfmtoc = require('../index');
 
 var file = 'README.md';

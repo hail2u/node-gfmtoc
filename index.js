@@ -1,5 +1,7 @@
-var marked = require('marked');
+'use strict';
 
+var marked = require('marked');
+var os = require('os');
 var word = require('./lib/regexp-word');
 
 exports.getEol = function (s) {
