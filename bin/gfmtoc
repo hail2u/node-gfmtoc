@@ -5,16 +5,19 @@
 var fs = require('fs');
 var gfmtoc = require('../index');
 
+var eol;
 var file = 'README.md';
+var md;
+var toc;
 
 if (process.argv.length > 2) {
   file = process.argv[2];
 }
 
-var markdown = fs.readFileSync(file, 'utf8');
-var eol = gfmtoc.getEol(markdown);
-var toc = gfmtoc.buildToc(markdown);
-fs.writeFileSync(file, markdown.split(eol).map(function (l) {
+md = fs.readFileSync(file, 'utf8');
+eol = gfmtoc.getEol(md);
+toc = gfmtoc.buildToc(md);
+fs.writeFileSync(file, md.split(eol).map(function (l) {
   if (l === '<!-- #toc -->') {
     this.skip = true;
 

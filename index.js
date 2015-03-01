@@ -6,16 +6,19 @@ var word = require('./lib/regexp-word');
 
 exports.getEol = function (s) {
   var cr = '\r';
-  var lf = '\n';
   var crlf = '\r\n';
+  var lf = '\n';
+  var n;
+  var r;
+  var rn;
 
   if (!s) {
     return os.EOL;
   }
 
-  var r = s.split(cr).length;
-  var n = s.split(lf).length;
-  var rn = s.split(crlf).length;
+  r = s.split(cr).length;
+  n = s.split(lf).length;
+  rn = s.split(crlf).length;
 
   if (r === rn && n === rn) {
     return crlf;
@@ -29,13 +32,14 @@ exports.getEol = function (s) {
 };
 
 exports.buildToc = function (markdown, eol) {
+  var h = [];
+  var indent = '  ';
+  var renderer = new marked.Renderer();
+
   if (!eol) {
     eol = this.getEol(markdown);
   }
 
-  var indent = '  ';
-  var h = [];
-  var renderer = new marked.Renderer();
   renderer.heading = function (text, level, raw) {
     h.push({
       l: level,
@@ -51,8 +55,8 @@ exports.buildToc = function (markdown, eol) {
   h.shift();
 
   return h.map(function (v, i, a) {
-    var sp = new Array(Math.max(0, v.l - a[0].l + 1)).join(indent);
     var id = v.r.toLowerCase();
+    var sp = new Array(Math.max(0, v.l - a[0].l + 1)).join(indent);
     var uniq = '';
     id = id.replace(word, '');
     id = id.replace(/ /g, '-');
