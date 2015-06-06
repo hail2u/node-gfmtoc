@@ -22,7 +22,7 @@ I don’t want to publish this npm package to npm registry.
 INSTALL
 -------
 
-    $ npm install -g hail2u/node-gfmtoc
+    $ npm install -g @hail2u/gfmtoc
 
 
 USAGE
