@@ -1,5 +1,5 @@
 {
-  "name": "gfmtoc",
+  "name": "@hail2u/gfmtoc",
   "description": "The GithHub flavoured Markdown ToC generator",
   "version": "0.1.0",
   "author": "Kyo Nagashima <hail2u@gmail.com> (https://kyonagashima.com/)",
@@ -15,7 +15,6 @@
   "homepage": "https://github.com/hail2u/node-gfmtoc",
   "license": "MIT",
   "main": "index.js",
-  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/hail2u/node-gfmtoc.git"
