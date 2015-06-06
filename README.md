@@ -5,18 +5,11 @@ The GitHub flavored Markdown ToC generator.
 
 <!-- #toc -->
 
-* [NOTE](#note)
 * [INSTALL](#install)
 * [USAGE](#usage)
 * [LICENSE](#license)
 
 <!-- /toc -->
-
-
-NOTE
-----
-
-I don’t want to publish this npm package to npm registry.
 
 
 INSTALL
