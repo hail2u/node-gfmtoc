@@ -1,13 +1,13 @@
-'use strict';
+"use strict";
 
-var marked = require('marked');
-var os = require('os');
-var word = require('./lib/regexp-word');
+var marked = require("marked");
+var os = require("os");
+var word = require("./lib/regexp-word");
 
 exports.getEOL = function (s) {
-  var cr = '\r';
-  var crlf = '\r\n';
-  var lf = '\n';
+  var cr = "\r";
+  var crlf = "\r\n";
+  var lf = "\n";
   var n;
   var r;
   var rn;
@@ -33,7 +33,7 @@ exports.getEOL = function (s) {
 
 exports.buildTOC = function (markdown, eol) {
   var h = [];
-  var indent = '  ';
+  var indent = "  ";
   var renderer = new marked.Renderer();
 
   if (!eol) {
@@ -57,18 +57,18 @@ exports.buildTOC = function (markdown, eol) {
   return h.map(function (v, i, a) {
     var id = v.r.toLowerCase();
     var sp = new Array(Math.max(0, v.l - a[0].l + 1)).join(indent);
-    var uniq = '';
-    id = id.replace(word, '');
-    id = id.replace(/ /g, '-');
+    var uniq = "";
+    id = id.replace(word, "");
+    id = id.replace(/ /g, "-");
 
     if (!this.headers[id]) {
       this.headers[id] = 1;
     } else {
-      uniq = '-' + this.headers[id];
+      uniq = "-" + this.headers[id];
       this.headers[id] += 1;
     }
 
-    return sp + '* [' + v.r + '](#' + encodeURIComponent(id + uniq) + ')';
+    return sp + "* [" + v.r + "](#" + encodeURIComponent(id + uniq) + ")";
   }, {
     headers: {}
   }).join(eol).trim();
