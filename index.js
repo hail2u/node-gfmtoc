@@ -4,7 +4,9 @@ var marked = require("marked");
 var os = require("os");
 var word = require("./lib/regexp-word");
 
-exports.getEOL = function (s) {
+var gfmtoc = exports;
+
+gfmtoc.getEOL = function (s) {
   var cr = "\r";
   var crlf = "\r\n";
   var lf = "\n";
@@ -31,7 +33,7 @@ exports.getEOL = function (s) {
   return lf;
 };
 
-exports.buildTOC = function (markdown, eol) {
+gfmtoc.buildTOC = function (markdown, eol) {
   var h = [];
   var indent = "  ";
   var renderer = new marked.Renderer();
