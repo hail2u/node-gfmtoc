@@ -1,7 +1,8 @@
 gfmtoc
 ======
 
-The GitHub flavored Markdown ToC generator.
+The only GitHub flavored Markdown ToC generator that supports
+multi-byte headings.
 
 <!-- #toc -->
 
