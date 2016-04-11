@@ -10,7 +10,7 @@
     "url": "https://github.com/hail2u/node-gfmtoc/issues"
   },
   "dependencies": {
-    "marked": "^0.3.2"
+    "marked": "^0.3.5"
   },
   "homepage": "https://github.com/hail2u/node-gfmtoc",
   "license": "MIT",
