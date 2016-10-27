@@ -35,7 +35,7 @@ gfmtoc.getEOL = function (s) {
 
 gfmtoc.buildTOC = function (markdown, eol) {
   var h = [];
-  var indent = "  ";
+  var indent = "    ";
   var renderer = new marked.Renderer();
 
   if (!eol) {
