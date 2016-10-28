@@ -1,7 +1,7 @@
 {
   "name": "@hail2u/gfmtoc",
   "description": "Generate ToC for Markdown text in GitHub Style",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": "Kyo Nagashima <hail2u@gmail.com> (https://kyonagashima.com/)",
   "bin": {
     "gfmtoc": "bin/gfmtoc.js"
