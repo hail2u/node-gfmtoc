@@ -2,14 +2,11 @@
 
 "use strict";
 
-var fs = require("fs");
-var gfmtoc = require("../index");
+const fs = require("fs");
+const gfmtoc = require("../index");
 
-var eol;
-var input = "README.md";
-var md;
-var output;
-var toc;
+let input = "README.md";
+let output;
 
 if (process.argv.length > 2) {
   input = process.argv[2];
@@ -22,18 +19,19 @@ if (input === "-") {
   output = process.stdout.fd;
 }
 
-md = fs.readFileSync(input, "utf8");
-eol = gfmtoc.getEOL(md);
-toc = gfmtoc.buildTOC(md);
+const md = fs.readFileSync(input, "utf8");
+const eol = gfmtoc.getEOL(md);
+const toc = gfmtoc.buildTOC(md);
+
 fs.writeFileSync(output, md.split(eol).map(function (l) {
   if (l === "<!-- #toc -->") {
     this.skip = true;
 
-    return l + eol + eol + toc;
+    return `${l}${eol}${eol}${toc}`;
   }
 
   if (l === "<!-- /toc -->") {
-    l = eol + l;
+    l = `${eol}${l}`;
     this.skip = false;
   }
 

@@ -1,26 +1,23 @@
 "use strict";
 
-var marked = require("marked");
-var os = require("os");
-var word = require("./lib/regexp-word");
+const marked = require("marked");
+const os = require("os");
+const word = require("./lib/regexp-word");
 
-var gfmtoc = exports;
+const gfmtoc = exports;
 
 gfmtoc.getEOL = function (s) {
-  var cr = "\r";
-  var crlf = "\r\n";
-  var lf = "\n";
-  var n;
-  var r;
-  var rn;
+  const cr = "\r";
+  const crlf = "\r\n";
+  const lf = "\n";
 
   if (!s) {
     return os.EOL;
   }
 
-  r = s.split(cr).length;
-  n = s.split(lf).length;
-  rn = s.split(crlf).length;
+  const r = s.split(cr).length;
+  const n = s.split(lf).length;
+  const rn = s.split(crlf).length;
 
   if (r === rn && n === rn) {
     return crlf;
@@ -34,9 +31,9 @@ gfmtoc.getEOL = function (s) {
 };
 
 gfmtoc.buildTOC = function (markdown, eol) {
-  var h = [];
-  var indent = "    ";
-  var renderer = new marked.Renderer();
+  const h = [];
+  const indent = "    ";
+  const renderer = new marked.Renderer();
 
   if (!eol) {
     eol = this.getEOL(markdown);
@@ -57,20 +54,19 @@ gfmtoc.buildTOC = function (markdown, eol) {
   h.shift();
 
   return h.map(function (v, i, a) {
-    var id = v.r.toLowerCase();
-    var sp = new Array(Math.max(0, v.l - a[0].l + 1)).join(indent);
-    var uniq = "";
-    id = id.replace(word, "");
-    id = id.replace(/ /g, "-");
+    const sp = new Array(Math.max(0, v.l - a[0].l + 1)).join(indent);
+    const id = v.r.toLowerCase().replace(word, "").replace(/ /g, "-");
+
+    let uniq = "";
 
     if (!this.headers[id]) {
       this.headers[id] = 1;
     } else {
-      uniq = "-" + this.headers[id];
+      uniq = `-${this.headers[id]}`;
       this.headers[id] += 1;
     }
 
-    return sp + "* [" + v.r + "](#" + encodeURIComponent(id + uniq) + ")";
+    return `${sp}* [${v.r}](#${encodeURIComponent(`${id}${uniq}`)})`;
   }, {
     headers: {}
   }).join(eol).trim();
