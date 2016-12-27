@@ -35,10 +35,6 @@ gfmtoc.buildTOC = function (markdown, eol) {
   const indent = "    ";
   const renderer = new marked.Renderer();
 
-  if (!eol) {
-    eol = this.getEOL(markdown);
-  }
-
   renderer.heading = function (text, level, raw) {
     h.push({
       l: level,

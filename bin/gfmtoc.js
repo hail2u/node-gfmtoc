@@ -20,7 +20,7 @@ if (input === "-") {
 
 const md = fs.readFileSync(input, "utf8");
 const eol = gfmtoc.getEOL(md);
-const toc = gfmtoc.buildTOC(md);
+const toc = gfmtoc.buildTOC(md, eol);
 
 fs.writeFileSync(
   output,
