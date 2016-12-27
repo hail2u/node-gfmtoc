@@ -55,7 +55,10 @@ gfmtoc.buildTOC = function (markdown, eol) {
 
   return h.map(function (v, i, a) {
     const sp = new Array(Math.max(0, v.l - a[0].l + 1)).join(indent);
-    const id = v.r.toLowerCase().replace(word, "").replace(/ /g, "-");
+    const id = v.r
+      .toLowerCase()
+      .replace(word, "")
+      .replace(/ /g, "-");
 
     let uniq = "";
 
@@ -69,5 +72,7 @@ gfmtoc.buildTOC = function (markdown, eol) {
     return `${sp}* [${v.r}](#${encodeURIComponent(`${id}${uniq}`)})`;
   }, {
     headers: {}
-  }).join(eol).trim();
+  })
+    .join(eol)
+    .trim();
 };
