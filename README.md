@@ -7,6 +7,7 @@ Generate ToC for Markdown text in GitHub Style
 
 * [INSTALL](#install)
 * [USAGE](#usage)
+* [NOTE](#note)
 * [LICENSE](#license)
 
 <!-- /toc -->
