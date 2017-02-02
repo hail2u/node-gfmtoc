@@ -43,7 +43,7 @@ fs.writeFileSync(output, md.split(eol)
   }, {
     skip: false
   })
-  .filter(function (l) {
+  .filter((l) => {
     return l !== undefined;
   })
   .join(eol));
